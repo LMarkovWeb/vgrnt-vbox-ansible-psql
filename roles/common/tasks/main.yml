@@ -1,0 +1,22 @@
+---
+- name: Upgrade all packages
+  dnf:
+    name: "*"
+    state: latest
+
+# for iptables
+- name: Stop and disable firewalld.
+  service:
+    name: firewalld
+    state: stopped
+    enabled: no
+
+- name: install iptables-services
+  yum:
+    name: iptables-services
+
+- name: start and enable iptables
+  service:
+    name: iptables
+    state: started
+    enabled: yes

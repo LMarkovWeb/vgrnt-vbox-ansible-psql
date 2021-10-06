@@ -1,0 +1,9 @@
+# vagrant test server
+[test_server]
+vagrant-centos8-ansible ansible_host=192.168.10.10 
+
+[test_server:vars]
+ansible_user=ansible 
+ansible_ssh_pass=ansible
+ansible_become_pass=ansible
+ansible_ssh_common_args="-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"

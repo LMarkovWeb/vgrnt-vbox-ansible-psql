@@ -1,0 +1,25 @@
+---
+- hosts: "{{ host }}"
+  vars:
+    # DB
+    pg_major_version: 12
+    pg_repo_url: "https://download.postgresql.org/pub/repos/yum/reporpms/EL-7-x86_64/pgdg-redhat-repo-latest.noarch.rpm"
+    pg_packages:
+      - postgresql{{ pg_major_version }}-server
+      - postgresql{{ pg_major_version }}-contrib
+  become: true
+  gather_facts: false
+  roles:
+    - users
+    - common
+    - iptables
+    - pg
+  handlers:
+    - name: restart sshd
+      service:
+        name: sshd
+        state: restarted
+    - name: restart postgres
+      service:
+        name: postgresql-{{pg_major_version}}
+        state: restarted

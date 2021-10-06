@@ -1,0 +1,4 @@
+# Настройки firewall
+- name: run iptables.save.sh script
+  script:
+    cmd: iptables_save.sh
